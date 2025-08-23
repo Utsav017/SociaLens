@@ -14,12 +14,14 @@ source = st.selectbox("Select Data Source", ["Upload CSV", "Reddit", "Twitter"])
 keyword = st.text_input("Enter Keyword / Subreddit / Hashtag")
 limit = st.slider("Number of posts", 10, 200, 50)
 
-classifier = load_classifier()
+
 
 # File uploader visible when "Upload CSV" is selected
 uploaded_file = None
 if source == "Upload CSV":
     uploaded_file = st.file_uploader("Upload CSV", type=["csv"])
+
+classifier = load_classifier()
 
 if st.button("Fetch & Analyze"):
     if source == "Upload CSV":
