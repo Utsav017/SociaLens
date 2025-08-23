@@ -1,8 +1,9 @@
 streamlit
+pandas
 transformers
 torch
-pandas
-scikit-learn
-matplotlib
 wordcloud
-langdetect
+matplotlib
+scikit-learn
+praw
+snscrape
