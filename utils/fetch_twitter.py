@@ -1,10 +1,27 @@
-import snscrape.modules.twitter as sntwitter
+# utils/fetch_twitter.py
+import tweepy
 import pandas as pd
+import streamlit as st
 
-def fetch_twitter(query, limit=50):
-    tweets = []
-    for tweet in sntwitter.TwitterSearchScraper(query).get_items():
-        tweets.append({"date": tweet.date, "text": tweet.content})
-        if len(tweets) >= limit:
-            break
-    return pd.DataFrame(tweets)
+def fetch_twitter(keyword, limit=50):
+    # Authenticate with Twitter API v2
+    client = tweepy.Client(bearer_token=st.secrets["X_BEARER_TOKEN"])
+
+    # Build query: no retweets, only English
+    query = f"{keyword} -is:retweet lang:en"
+
+    tweets = client.search_recent_tweets(
+        query=query,
+        max_results=min(limit, 100),   # Twitter API max per call = 100
+        tweet_fields=["created_at", "text"]
+    )
+
+    posts = []
+    if tweets.data:
+        for tweet in tweets.data:
+            posts.append({
+                "date": tweet.created_at,
+                "text": tweet.text
+            })
+
+    return pd.DataFrame(posts)
