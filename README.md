@@ -131,7 +131,7 @@ SociaLens/
 
 ## 👨‍💻 Authors
 
-* **Utsav017** – [GitHub](https://github.com/Utsav017)
+* **Shivansh Gupta** – [GitHub](https://github.com/Utsav017)
 * Built with ❤️ using **Streamlit + Hugging Face**
 
 ---
